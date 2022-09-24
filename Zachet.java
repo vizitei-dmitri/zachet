@@ -1,23 +1,17 @@
-package Zachet;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 
 public class Zachet {
-    public static void main(String[] args) {
-        List<String> list = List.of("Africa", "Europe", "Asia", "Antarctic");
-        Map<Integer, List<String>> map = new HashMap<>();
+        public static void main(String[] args) {
 
-        map.put(7, list.stream().filter(x->x.length()==7).findFirst().orElse(null));
-        map.put(6, list.stream().filter(x->x.length()==6).findFirst().orElse(null));
-        map.put(4, list.stream().filter(x->x.length()==4).findFirst().orElse(null));
-        map.put(9, list.stream().filter(x->x.length()==9).findFirst().orElse(null));
-
-
-
-        map.forEach((key, value) -> System.out.println(key + " " + value));
+            List<String> list = new ArrayList();
+            Scanner scanner = new Scanner(System.in);
+            Map<Integer, List<String>> map = new HashMap<>();
+            for (int j = 0; j<4; j++){
+                list.add(scanner.nextLine());
+            }
+            for(int i = 0; i<list.size(); i++){
+                map.put(list.get(i).length(), Collections.singletonList(list.get(i)));
+            }
+            map.forEach((key, value) -> System.out.println(key + " " + value));
+        }
     }
-}
