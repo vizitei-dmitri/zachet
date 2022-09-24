@@ -1,1 +1,38 @@
+import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class Potok {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int num = scanner.nextInt();
+        AtomicInteger atomicInteger = new AtomicInteger(num);//сумма на счету
+        ExecutorService executor = Executors.newFixedThreadPool(4);
+
+//        System.out.println("enter amount of transactions");
+//        int n = scanner.nextInt();
+        int y = -1;
+        for (int i = 0; i<num; i++){
+//            System.out.println("how much do you want to get?");
+//            Integer x = scanner.nextInt();
+//            int y = 0 - x;
+
+            if ((atomicInteger.getAndAdd(y)) == 0){
+                System.out.println("you are out of cash");
+                break;
+            }
+
+            Runnable task = () ->  atomicInteger.getAndAdd(y);
+//                System.out.println("your sum is " + x + " and the sum left is " + atomicInteger.get());
+            executor.submit(task);
+            System.out.println(atomicInteger.get());
+
+        }
+        executor.shutdown();
+
+
+    }
+
+}
 
